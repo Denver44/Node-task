@@ -1,9 +1,9 @@
 import express from 'express';
-let app = express();
-
 import LeadRouter from './routers/LeadRouter.js';
 
+let app = express();
+
 app.use(express.json());
-app.use(LeadRouter);
+app.use('/leads', LeadRouter);
 
 export default app;
