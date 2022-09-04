@@ -17,7 +17,7 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'WYSA Challenge 1',
+      title: 'WYSA API',
       version: '1.0.0',
       description: 'A simple Express API which store the leads',
     },

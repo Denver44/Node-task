@@ -1,13 +1,13 @@
 {
-  "name": "server",
+  "name": "Wysa-Api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Express API which store the leads",
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "npm -r dotenv/config server.js dotenv_config_path=.env.prod",
-    "dev": "nodemon -r dotenv/config server.js dotenv_config_path=.env.local",
-    "dev:prod": "nodemon -r dotenv/config server.js dotenv_config_path=.env.prod"
+    "start": "node server.js",
+    "dev:prod": "nodemon -r dotenv/config server.js dotenv_config_path=.env.prod",
+    "dev": "nodemon -r dotenv/config server.js dotenv_config_path=.env.local"
   },
   "author": "",
   "license": "ISC",
