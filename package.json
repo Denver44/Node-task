@@ -17,10 +17,10 @@
     "express": "^4.17.1",
     "mongoose": "^6.1.4",
     "swagger-jsdoc": "^6.2.5",
+    "morgan": "^1.10.0",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.19"
   }
 }

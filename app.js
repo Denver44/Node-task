@@ -11,8 +11,11 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-const { PORT } = process.env;
+const { PORT, NODE_ENV, WEB_URL } = process.env;
 
+const url = NODE_ENV == 'production' ? WEB_URL : WEB_URL.replace('PORT', PORT);
+
+console.log(url);
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -23,7 +26,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`,
+        url,
       },
     ],
   },
