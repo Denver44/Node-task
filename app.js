@@ -14,9 +14,8 @@ app.use(morgan('dev'));
 
 const { PORT, NODE_ENV, WEB_URL } = process.env;
 
-const url = NODE_ENV == 'production' ? WEB_URL : WEB_URL.replace('PORT', PORT);
+const URL = NODE_ENV == 'production' ? WEB_URL : WEB_URL.replace('PORT', PORT);
 
-console.log(url);
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -27,7 +26,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000',
+        url: URL,
       },
     ],
   },
@@ -37,7 +36,6 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.get('/', (_, res) => res.send('Welcome To WYSA API ✅'));
-
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api/v1/leads', LeadRouter);
 
@@ -45,6 +43,6 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
-app.use(GlobalErrorHandling);
+app.use(GlobalErrorHandling); // Global Error Handling
 
 export default app;

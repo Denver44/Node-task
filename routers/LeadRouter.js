@@ -37,7 +37,7 @@ const router = new express.Router();
  *           items:
  *              type: string
  *           description: The change you feel in yourself
- *           example:   ["I would like go to sleep easily"]
+ *           example:   ["I go to sleep easily", "I Feel better after good night sleep" , "Feel energetic" ]
  *
  *         struggleWithSleep:
  *           type: string
