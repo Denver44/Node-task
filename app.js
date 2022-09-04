@@ -32,6 +32,7 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
+app.get('/', (_, res) => res.send('Welcome To WYSA 😄'));
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/leads', LeadRouter);
 
