@@ -1,13 +1,30 @@
 import mongoose from 'mongoose';
+import { ENUM_CHANGE } from '../utils/constant.js';
 
 const leadSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: [true, 'Please enter your userName'],
   },
+
   change: {
     type: [String],
-    required: [true, 'Select all the changes you would like to see'],
+    required: [true],
+    enum: {
+      values: ENUM_CHANGE,
+      message: 'change can be either : ' + ENUM_CHANGE.join(' or '),
+    },
+
+    validate: {
+      validator: function (arr) {
+        if (
+          !Array.isArray(arr) ||
+          arr.length == 0 ||
+          arr.forEach((str) => typeof str !== 'string')
+        )
+          throw new Error('Select at least one change you would like to see');
+      },
+    },
   },
 
   struggleWithSleep: {

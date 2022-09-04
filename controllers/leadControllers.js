@@ -1,73 +1,50 @@
 import Lead from '../models/leadsModel.js';
+import { catchAsync, AppError } from '../utils/helper.js';
 
-export const createLead = async (req, res) => {
-  try {
-    const lead = await Lead.create(req.body);
-    res.status(201).json({
-      status: 'created',
-      data: {
-        data: lead,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      error,
-    });
-  }
-};
+export const createLead = catchAsync(async (req, res, next) => {
+  const newLead = await Lead.create(req.body);
+  res.status(201).json({
+    status: 'created',
+    data: {
+      data: newLead,
+    },
+  });
+});
 
-export const getLeadByID = async (req, res) => {
-  try {
-    const doc = await Lead.findById(req.params?.id);
+export const updateLeadById = catchAsync(async (req, res, next) => {
+  const doc = await Lead.findByIdAndUpdate(req?.params?.id, req?.body, {
+    new: true,
+    runValidators: true,
+  });
 
-    if (!doc) throw Error;
+  if (!doc) return next(new AppError('No document found with that ID ', 404));
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        data: doc,
-      },
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: 'No document found with that ID',
-    });
-  }
-};
+  res.status(201).json({
+    status: 'updated',
+    data: {
+      data: doc,
+    },
+  });
+});
 
-export const getAllLeads = async (req, res) => {
-  try {
-    const leads = await Lead.find();
-    res.status(200).json({
-      status: 'success',
-      data: {
-        data: leads,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
-      error: 'No document exist',
-    });
-  }
-};
+export const getLeadByID = catchAsync(async (req, res, next) => {
+  const doc = await Lead.findById(req.params?.id);
+  if (!doc) return next(new AppError('No document found with that ID ', 404));
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: doc,
+    },
+  });
+});
 
-export const updateLeadById = async (req, res) => {
-  try {
-    const doc = await Lead.findByIdAndUpdate(req?.params?.id, req?.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!doc) throw Error;
-
-    res.status(201).json({
-      status: 'updated',
-      data: {
-        data: doc,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
-      error: 'No document found with that ID',
-    });
-  }
-};
+export const getAllLeads = catchAsync(async (req, res) => {
+  const leads = await Lead.find();
+  res.status(200).json({
+    status: 'success',
+    result: leads.length,
+    data: {
+      data: leads,
+    },
+  });
+});

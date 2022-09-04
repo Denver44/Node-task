@@ -113,6 +113,29 @@ router.get('/', getAllLeads);
 
 router.get('/:id', getLeadByID);
 
+/**
+ * @swagger
+ * /leads:
+ *   post:
+ *     summary: Create a new lead
+ *     tags: [Leads]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Lead'
+ *     responses:
+ *       200:
+ *         description: The Lead was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Lead'
+ *       500:
+ *         description: Some server error
+ */
+
 router.post('/', createLead);
 
 router.patch('/:id', updateLeadById);

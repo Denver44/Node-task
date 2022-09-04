@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import LeadRouter from './routers/LeadRouter.js';
+import GlobalErrorHandling from './controllers/errorController.js';
 
 let app = express();
 
@@ -26,7 +27,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url,
+        url: 'http://localhost:3000',
       },
     ],
   },
@@ -35,8 +36,15 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-app.get('/', (_, res) => res.send('Welcome To WYSA 😄'));
+app.get('/', (_, res) => res.send('Welcome To WYSA API ✅'));
+
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use('/leads', LeadRouter);
+app.use('/api/v1/leads', LeadRouter);
+
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
+app.use(GlobalErrorHandling);
 
 export default app;
