@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-
 dotenv.config();
 
 process.on('uncaughtException', (err) => {
@@ -11,12 +10,16 @@ process.on('uncaughtException', (err) => {
 import mongoose from 'mongoose';
 import app from './app.js';
 
-const { PORT } = process.env;
+const { PORT, NODE_ENV } = process.env;
 
-const DB = process.env.DATABASE_LOCAL;
+let DB = process.env.DB_CONNECTION_STRING;
+
+if (NODE_ENV == 'production')
+  DB = DB.replace('<password>', process.env.DB_PASSWORD);
 
 mongoose.connect(DB).then((con) => {
-  console.log('DB connection successful');
+  if (NODE_ENV == 'production') console.log('Remote DB connection successful');
+  else console.log('Local DB connection successful');
 });
 
 const server = app.listen(PORT, () => {
