@@ -5,8 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "npm server.js",
-    "dev": "nodemon -r dotenv/config server.js dotenv_config_path=.env.local"
+    "start": "npm -r dotenv/config server.js dotenv_config_path=.env.prod",
+    "dev": "nodemon -r dotenv/config server.js dotenv_config_path=.env.local",
+    "dev:prod": "nodemon -r dotenv/config server.js dotenv_config_path=.env.prod"
   },
   "author": "",
   "license": "ISC",
