@@ -1,7 +1,6 @@
 import { AppError } from '../utils/helper.js';
 
 const sendErrorDev = (req, res, err) => {
-  // A) API
   if (req.originalUrl.startsWith('/api')) {
     return res.status(err.statusCode || 500).json({
       status: err.status || 'error',
@@ -10,18 +9,9 @@ const sendErrorDev = (req, res, err) => {
       stack: err.stack,
     });
   }
-
-  // LOG ERROR
-  console.log('Error 💥', err);
-  // B) RENDERED WEBSITES
-  return res.status(err.statusCode).render('error', {
-    title: 'Something went wrong',
-    msg: err.message,
-  });
 };
 
 const sendErrorProd = (req, res, err) => {
-  // A) API
   if (req.originalUrl.startsWith('/api')) {
     if (err.isOperational) {
       return res.status(err.statusCode || 500).json({
@@ -34,20 +24,6 @@ const sendErrorProd = (req, res, err) => {
       message: 'Something went very wrong!',
     });
   }
-  // B) RENDERED WEBSITES
-  if (err.isOperational) {
-    return res.status(err.statusCode).render('error', {
-      title: 'Something went wrong',
-      msg: err.message,
-    });
-  }
-  // LOG ERROR
-  console.log('Error 💥', err);
-  // UNKNOWN AND PROGRAMMING ERROR THEN GENERIC MESSAGE
-  return res.status(err.statusCode).render('error', {
-    title: 'Something went wrong',
-    msg: 'Please try again later!',
-  });
 };
 
 const handleCastErrorDB = (err) => {
