@@ -4,10 +4,17 @@
   <br>
 </h1>
 
+### Deployed Version
+
+---
+
+Live demo (Feel free to visit) 👉 : https://wysa-app-api.herokuapp.com/
+
 ## Key Features
 
-1. Leads
+---
 
+1. Leads
    - Create Leads
    - Get Lead By ID
    - Get All Leads
@@ -15,7 +22,9 @@
 
 ### How to use
 
-POSTMAN API Documentation : (Please to visit) 👉 : https://documenter.getpostman.com/view/12768556/VUjQnkCu
+- Swagger API for Detail Rest API 👉 : https://wysa-app-api.herokuapp.com/swagger
+
+- POSTMAN API Documentation 👉 : https://documenter.getpostman.com/view/12768556/VUjQnkCu
 
 ## Installation
 
@@ -23,5 +32,5 @@ Please install all the dependencies by running
 
 ```bash
 $ npm i
-$ npm run start
+$ npm run dev
 ```
