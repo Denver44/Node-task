@@ -69,7 +69,7 @@ const router = new express.Router();
  * @swagger
  * /api/v1/leads:
  *   get:
- *     summary: Returns the list of all the leads
+ *     summary: Return the list of all the leads
  *     tags: [Leads]
  *     responses:
  *       200:
@@ -145,7 +145,7 @@ router.post('/', createLead);
  * @swagger
  * /api/v1/leads/{id}:
  *  patch:
- *    summary: Update the book by the id
+ *    summary: Update the lead by the id
  *    tags: [Leads]
  *    parameters:
  *      - in: path
